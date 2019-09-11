@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netcoreapp3.0</TargetFramework>
+		<LangVersion>latest</LangVersion>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Newtonsoft.Json" Version="12.0.3-beta1" />
+		<PackageReference Include="System.Composition.AttributedModel" Version="1.3.0-preview6.19303.8" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<Reference Include="ArchiSteamFarm">
+			<HintPath>..\..\ASF-master\ArchiSteamFarm\bin\Release\netcoreapp2.2\ArchiSteamFarm.dll</HintPath>
+		</Reference>
+		<Reference Include="Harmony">
+			<HintPath>lib\Harmony.dll</HintPath>
+		</Reference>
+		<Reference Include="SteamKit2">
+			<HintPath>..\..\ASF-master\ArchiSteamFarm\lib\SteamKit2.dll</HintPath>
+		</Reference>
+	</ItemGroup>
+	
+</Project>
