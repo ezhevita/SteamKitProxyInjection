@@ -8,7 +8,6 @@ using ArchiSteamFarm;
 using ArchiSteamFarm.Plugins;
 using HarmonyLib;
 using Newtonsoft.Json.Linq;
-using SteamKit2;
 
 namespace SteamKitProxyInjection {
 	[Export(typeof(IPlugin))]
@@ -24,21 +23,22 @@ namespace SteamKitProxyInjection {
 			ASF.ArchiLogger.LogGenericInfo("Injecting...");
 			Harmony harmony = new Harmony("com.Vital7.SteamKitProxyInjection");
 			
-			ASF.ArchiLogger.LogGenericTrace("Retrieving WebSocketContext type...");
-			Assembly steamkitAssembly = typeof(SteamID).Assembly;
-			Type webSocketConnectionType = steamkitAssembly.GetType("SteamKit2.WebSocketConnection");
-			Type webSocketContextType = webSocketConnectionType.GetNestedTypes(BindingFlags.NonPublic)[0];
+			ASF.ArchiLogger.LogGenericTrace("Retrieving WebSocketConnection and WebSocketContext types...");
+			Type webSocketConnectionType = AccessTools.TypeByName("SteamKit2.WebSocketConnection");
+			Type webSocketContextType = AccessTools.TypeByName("SteamKit2.WebSocketConnection+WebSocketContext");
 
 			ASF.ArchiLogger.LogGenericTrace("Retrieving WebSocketContext constructor...");
 			ConstructorInfo constructor = AccessTools.Constructor(webSocketContextType, new[] {webSocketConnectionType, typeof(EndPoint)});
 			ASF.ArchiLogger.LogGenericTrace("Patching...");
-			harmony.Patch(constructor, postfix: new HarmonyMethod(AccessTools.Method(typeof(SteamKitProxyInjection), "TargetMethod")));
+			harmony.Patch(constructor, postfix: new HarmonyMethod(AccessTools.Method(typeof(SteamKitProxyInjection), nameof(TargetMethod))));
 			ASF.ArchiLogger.LogGenericInfo("Successfully injected!");
 		}
 
+		// ReSharper disable once InconsistentNaming
+		// ReSharper disable once MemberCanBePrivate.Global
 		public static void TargetMethod(ClientWebSocket ___socket) {
 			ASF.ArchiLogger.LogGenericTrace("Retrieving WebProxy config value...");
-			IWebProxy webProxy = (IWebProxy) AccessTools.Property(typeof(GlobalConfig), "WebProxy").GetValue(ASF.GlobalConfig);
+			IWebProxy webProxy = ASF.GlobalConfig.WebProxy;
 			ASF.ArchiLogger.LogGenericTrace("Setting proxy...");
 			___socket.Options.Proxy = webProxy;
 		}
