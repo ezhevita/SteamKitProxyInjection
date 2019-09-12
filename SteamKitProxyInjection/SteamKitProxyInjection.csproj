@@ -7,12 +7,12 @@
 
 	<ItemGroup>
 		<PackageReference Include="Newtonsoft.Json" Version="12.0.3-beta1" />
-		<PackageReference Include="System.Composition.AttributedModel" Version="1.3.0-preview6.19303.8" />
+		<PackageReference Include="System.Composition.AttributedModel" Version="1.3.0-preview9.19421.4" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<Reference Include="ArchiSteamFarm">
-			<HintPath>..\..\ASF-master\ArchiSteamFarm\bin\Release\netcoreapp2.2\ArchiSteamFarm.dll</HintPath>
+			<HintPath>..\..\ASF-master\ArchiSteamFarm\bin\Release\netcoreapp3.0\ArchiSteamFarm.dll</HintPath>
 		</Reference>
 		<Reference Include="Harmony">
 			<HintPath>lib\Harmony.dll</HintPath>
