@@ -16,13 +16,14 @@ namespace SteamKitProxyInjection {
 		public void OnLoaded() {
 			ASF.ArchiLogger.LogGenericInfo("Loaded " + Name);
 		}
-		
+
 		public string Name => nameof(SteamKitProxyInjection);
 		public Version Version => new Version(1, 0, 0, 0);
+
 		public void OnASFInit(IReadOnlyDictionary<string, JToken> additionalConfigProperties = null) {
 			ASF.ArchiLogger.LogGenericInfo("Injecting...");
 			Harmony harmony = new Harmony("com.Vital7.SteamKitProxyInjection");
-			
+
 			ASF.ArchiLogger.LogGenericTrace("Retrieving WebSocketConnection and WebSocketContext types...");
 			Type webSocketConnectionType = AccessTools.TypeByName("SteamKit2.WebSocketConnection");
 			Type webSocketContextType = AccessTools.TypeByName("SteamKit2.WebSocketConnection+WebSocketContext");
@@ -39,6 +40,10 @@ namespace SteamKitProxyInjection {
 		public static void TargetMethod(ClientWebSocket ___socket) {
 			ASF.ArchiLogger.LogGenericTrace("Retrieving WebProxy config value...");
 			IWebProxy webProxy = ASF.GlobalConfig.WebProxy;
+			if (webProxy == null) {
+				return;
+			}
+
 			ASF.ArchiLogger.LogGenericTrace("Setting proxy...");
 			___socket.Options.Proxy = webProxy;
 		}
