@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Composition;
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.WebSockets;
 using System.Reflection;
@@ -11,7 +12,7 @@ using Newtonsoft.Json.Linq;
 
 namespace SteamKitProxyInjection {
 	[Export(typeof(IPlugin))]
-	// ReSharper disable UnusedMember.Global
+	[SuppressMessage("ReSharper", "UnusedMember.Global")]
 	public class SteamKitProxyInjection : IASF {
 		public void OnLoaded() {
 			ASF.ArchiLogger.LogGenericInfo("Loaded " + Name);
@@ -35,8 +36,8 @@ namespace SteamKitProxyInjection {
 			ASF.ArchiLogger.LogGenericInfo("Successfully injected!");
 		}
 
-		// ReSharper disable once InconsistentNaming
-		// ReSharper disable once MemberCanBePrivate.Global
+		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+		[SuppressMessage("ReSharper", "InconsistentNaming")]
 		public static void TargetMethod(ClientWebSocket ___socket) {
 			ASF.ArchiLogger.LogGenericTrace("Retrieving WebProxy config value...");
 			IWebProxy webProxy = ASF.GlobalConfig.WebProxy;
