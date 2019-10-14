@@ -18,7 +18,7 @@ namespace SteamKitProxyInjection {
 		}
 
 		public string Name => nameof(SteamKitProxyInjection);
-		public Version Version => new Version(1, 0, 0, 0);
+		public Version Version => Assembly.GetExecutingAssembly().GetName().Version;
 
 		public void OnASFInit(IReadOnlyDictionary<string, JToken> additionalConfigProperties = null) {
 			ASF.ArchiLogger.LogGenericInfo("Injecting...");

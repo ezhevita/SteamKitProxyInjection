@@ -1,0 +1,6 @@
+[submodule "ArchiSteamFarm"]
+	path = ArchiSteamFarm
+	url = https://github.com/JustArchiNET/ArchiSteamFarm.git
+[submodule "Harmony"]
+	path = Harmony
+	url = https://github.com/pardeike/Harmony.git
