@@ -8,11 +8,12 @@ using System.Reflection;
 using ArchiSteamFarm;
 using ArchiSteamFarm.Plugins;
 using HarmonyLib;
+using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
 
 namespace SteamKitProxyInjection {
 	[Export(typeof(IPlugin))]
-	[SuppressMessage("ReSharper", "UnusedMember.Global")]
+	[UsedImplicitly]
 	public class SteamKitProxyInjection : IASF {
 		public void OnLoaded() {
 			ASF.ArchiLogger.LogGenericInfo("Loaded " + Name);
@@ -23,7 +24,7 @@ namespace SteamKitProxyInjection {
 
 		public void OnASFInit(IReadOnlyDictionary<string, JToken> additionalConfigProperties = null) {
 			ASF.ArchiLogger.LogGenericInfo("Injecting...");
-			Harmony harmony = new Harmony("com.Vital7.SteamKitProxyInjection");
+			Harmony harmony = new Harmony("tech.Vital7.SteamKitProxyInjection");
 
 			ASF.ArchiLogger.LogGenericTrace("Retrieving WebSocketConnection and WebSocketContext types...");
 			Type webSocketConnectionType = AccessTools.TypeByName("SteamKit2.WebSocketConnection");
