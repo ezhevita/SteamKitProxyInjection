@@ -16,7 +16,7 @@ namespace SteamKitProxyInjection {
 	[UsedImplicitly]
 	public class SteamKitProxyInjection : IASF {
 		public void OnLoaded() {
-			ASF.ArchiLogger.LogGenericInfo("Loaded " + Name);
+			ASF.ArchiLogger.LogGenericInfo("Loaded " + Name + " by Vital7 | https://github.com/Vital7/SteamKitProxyInjection");
 		}
 
 		public string Name => nameof(SteamKitProxyInjection);
