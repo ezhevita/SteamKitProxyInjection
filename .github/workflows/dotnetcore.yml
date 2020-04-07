@@ -5,7 +5,7 @@ on: [push]
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
     - uses: actions/checkout@v1
@@ -16,6 +16,16 @@ jobs:
       with:
         dotnet-version: 3.1.100
     - name: Build with .NET Core
-      run: dotnet publish -c Release -f netcoreapp3.1
+      run: dotnet publish -c Release -f netcoreapp3.1 -o out/generic
     - name: Build with .NET Framework
-      run: dotnet publish -c Release -f net48
+      run: dotnet publish -c Release -f net48 -o out/generic-netf
+    - name: Upload generic artifacts
+      uses: actions/upload-artifact@v1
+      with: 
+        name: SteamKitProxyInjection-generic
+        path: out/generic 
+    - name: Upload generic-netf artifacts
+      uses: actions/upload-artifact@v1
+      with: 
+        name: SteamKitProxyInjection-generic
+        path: out/generic-netf
