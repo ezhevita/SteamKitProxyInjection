@@ -27,5 +27,5 @@ jobs:
     - name: Upload generic-netf artifacts
       uses: actions/upload-artifact@v1
       with: 
-        name: SteamKitProxyInjection-generic
+        name: SteamKitProxyInjection-generic-netf
         path: out/generic-netf
