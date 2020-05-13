@@ -10,7 +10,7 @@
 		<PackageReference Include="Lib.Harmony" Version="2.0.1" />
 		<PackageReference Include="Newtonsoft.Json" Version="*" />
 		<PackageReference Include="SteamKit2" Version="*" />
-		<PackageReference Include="System.Composition.AttributedModel" Version="1.4.0" />
+		<PackageReference Include="System.Composition.AttributedModel" Version="1.4.1" />
 	</ItemGroup>
 
 	<ItemGroup>
