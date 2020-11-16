@@ -20,11 +20,11 @@ namespace SteamKitProxyInjection {
 		}
 
 		public string Name => nameof(SteamKitProxyInjection);
-		public Version Version => Assembly.GetExecutingAssembly().GetName().Version;
+		public Version Version => Assembly.GetExecutingAssembly().GetName().Version ?? throw new InvalidOperationException();
 
-		public void OnASFInit(IReadOnlyDictionary<string, JToken> additionalConfigProperties = null) {
+		public void OnASFInit(IReadOnlyDictionary<string, JToken>? additionalConfigProperties = null) {
 			ASF.ArchiLogger.LogGenericInfo("Injecting...");
-			Harmony harmony = new Harmony("tech.Vital7.SteamKitProxyInjection");
+			Harmony harmony = new("tech.Vital7.SteamKitProxyInjection");
 
 			ASF.ArchiLogger.LogGenericTrace("Retrieving WebSocketConnection and WebSocketContext types...");
 			Type webSocketConnectionType = AccessTools.TypeByName("SteamKit2.WebSocketConnection");
@@ -41,7 +41,7 @@ namespace SteamKitProxyInjection {
 		[SuppressMessage("ReSharper", "InconsistentNaming")]
 		public static void TargetMethod(ClientWebSocket ___socket) {
 			ASF.ArchiLogger.LogGenericTrace("Retrieving WebProxy config value...");
-			IWebProxy webProxy = ASF.GlobalConfig.WebProxy;
+			IWebProxy? webProxy = ASF.GlobalConfig?.WebProxy;
 			if (webProxy == null) {
 				return;
 			}
