@@ -1,12 +1,14 @@
-name: .NET Core
+name: .NET
 
-on: [push]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
-
     runs-on: windows-latest
-
     steps:
     - uses: actions/checkout@v1
     - name: Checkout submodules
@@ -14,7 +16,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.100
+        dotnet-version: 5.0.x
     - name: Build with .NET Core
       run: dotnet publish -c Release -f net5.0 -o out/generic
     - name: Build with .NET Framework
@@ -22,10 +24,10 @@ jobs:
     - name: Upload generic artifacts
       uses: actions/upload-artifact@v1
       with: 
-        name: SteamKitProxyInjection-generic
+        name: ${{ github.event.repository.name }}-generic
         path: out/generic 
     - name: Upload generic-netf artifacts
       uses: actions/upload-artifact@v1
       with: 
-        name: SteamKitProxyInjection-generic-netf
+        name: ${{ github.event.repository.name }}-generic-netf
         path: out/generic-netf
