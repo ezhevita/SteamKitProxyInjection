@@ -14,9 +14,6 @@
 		<PackageReference Include="SteamKit2" Version="*" IncludeAssets="compile" />
 		<PackageReference Include="Lib.Harmony" Version="2.0.4" />
 		<PackageReference Include="System.Composition.AttributedModel" Version="*" IncludeAssets="compile" />
-	</ItemGroup>
-
-	<ItemGroup>
 		<ProjectReference Include="..\ArchiSteamFarm\ArchiSteamFarm\ArchiSteamFarm.csproj" Private="false" ExcludeAssets="all" />
 	</ItemGroup>
 	
