@@ -19,7 +19,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: env.DOTNET_SDK_VERSION
+        dotnet-version: ${{ env.DOTNET_SDK_VERSION }}
     - name: Build with .NET Core
       run: dotnet publish -c Release -f net5.0 -o out/generic
     - name: Build with .NET Framework
