@@ -6,6 +6,9 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  DOTNET_SDK_VERSION: 5.0.201
+
 jobs:
   build:
     runs-on: windows-latest
@@ -16,7 +19,7 @@ jobs:
     - name: Setup .NET Core
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: 5.0.x
+        dotnet-version: env.DOTNET_SDK_VERSION
     - name: Build with .NET Core
       run: dotnet publish -c Release -f net5.0 -o out/generic
     - name: Build with .NET Framework
