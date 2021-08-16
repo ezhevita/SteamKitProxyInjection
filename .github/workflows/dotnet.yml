@@ -29,9 +29,10 @@ jobs:
     - name: Archive generic-netf release
       uses: thedoctor0/zip-release@master
       with:
-        files: out/generic-netf
+        directory: out/generic
         type: 'zip'
-        filename: 'out/generic-netf.zip'
+        filename: 'out/generic.zip'
+        exclusions: '*.json'
 
     - name: Upload generic-netf artifacts
       uses: actions/upload-artifact@v2
@@ -62,9 +63,10 @@ jobs:
       - name: Archive generic release
         uses: thedoctor0/zip-release@master
         with:
-          files: out/generic
+          directory: out/generic
           type: 'zip'
           filename: 'out/generic.zip'
+          exclusions: '*.json'
 
       - name: Upload generic artifacts
         uses: actions/upload-artifact@v2

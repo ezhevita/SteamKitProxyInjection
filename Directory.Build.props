@@ -4,8 +4,9 @@
 		<ApplicationIcon/>
 		<Authors>Vital7</Authors>
 		<Company>$(Authors)</Company>
-		<Copyright>Copyright © $(Authors) 2020-$([System.DateTime]::UtcNow.Year)</Copyright>
+		<Copyright>Copyright © $(Company) 2020-$([System.DateTime]::UtcNow.Year)</Copyright>
 		<PackageIcon/>
+		<PackageProjectUrl>https://github.com/$(Company)/$(MSBuildProjectName)</PackageProjectUrl>
 		<PackageReleaseNotes>$(PackageProjectUrl)/releases</PackageReleaseNotes>
 		<PublicSign>false</PublicSign>
 		<OutputType>Library</OutputType>
