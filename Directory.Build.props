@@ -1,0 +1,16 @@
+<Project>
+
+	<PropertyGroup>
+		<ApplicationIcon/>
+		<Authors>Vital7</Authors>
+		<Company>$(Authors)</Company>
+		<Copyright>Copyright © $(Authors) 2020-$([System.DateTime]::UtcNow.Year)</Copyright>
+		<PackageIcon/>
+		<PackageReleaseNotes>$(PackageProjectUrl)/releases</PackageReleaseNotes>
+		<PublicSign>false</PublicSign>
+		<OutputType>Library</OutputType>
+		<RepositoryUrl>$(PackageProjectUrl).git</RepositoryUrl>
+		<SignAssembly>false</SignAssembly>
+	</PropertyGroup>
+
+</Project>
