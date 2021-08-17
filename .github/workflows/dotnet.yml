@@ -76,6 +76,9 @@ jobs:
           name: ${{ github.event.repository.name }}-generic-netf
           path: out
 
+      - name: List files
+        run: ls -l out
+
       - name: Archive generic release
         uses: thedoctor0/zip-release@master
         with:
