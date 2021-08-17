@@ -68,16 +68,13 @@ jobs:
         uses: actions/download-artifact@v2.0.10
         with:
           name: ${{ github.event.repository.name }}-generic
-          path: out
+          path: out/${{ github.event.repository.name }}-generic
 
       - name: Download generic-netf artifacts
         uses: actions/download-artifact@v2.0.10
         with:
           name: ${{ github.event.repository.name }}-generic-netf
-          path: out
-
-      - name: List files
-        run: ls -l out
+          path: out/${{ github.event.repository.name }}-generic-netf
 
       - name: Archive generic release
         uses: thedoctor0/zip-release@master
