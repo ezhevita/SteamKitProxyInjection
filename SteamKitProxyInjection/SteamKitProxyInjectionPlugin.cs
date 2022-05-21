@@ -18,7 +18,7 @@ namespace SteamKitProxyInjection {
 	public class SteamKitProxyInjectionPlugin : IASF {
 		public Task OnLoaded()
 		{
-			ASF.ArchiLogger.LogGenericInfo($"{Name} by Vital7 | Support & source code: https://github.com/Vital7/{Name}");
+			ASF.ArchiLogger.LogGenericInfo($"{Name} by ezhevita | Support & source code: https://github.com/ezhevita/{Name}");
 
 			return Task.CompletedTask;
 		}
@@ -29,7 +29,7 @@ namespace SteamKitProxyInjection {
 		public Task OnASFInit(IReadOnlyDictionary<string, JToken>? additionalConfigProperties = null)
 		{
 			ASF.ArchiLogger.LogGenericInfo("Injecting...");
-			Harmony harmony = new("tech.Vital7.SteamKitProxyInjection");
+			Harmony harmony = new("dev.ezhevita.SteamKitProxyInjection");
 
 			ASF.ArchiLogger.LogGenericTrace("Retrieving WebSocketConnection and WebSocketContext types...");
 			Type webSocketConnectionType = AccessTools.TypeByName("SteamKit2.WebSocketConnection");
