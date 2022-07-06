@@ -50,7 +50,7 @@ jobs:
         run: dotnet restore
 
       - name: Build with .NET Framework
-        run: dotnet publish -c Release -f net48 -o out/${{ github.event.repository.name }}-generic-netf
+        run: dotnet publish -c Release -f net48 -o out/${{ github.event.repository.name }}-generic-netf -v d
 
       - name: Upload generic-netf artifacts
         uses: actions/upload-artifact@v2
