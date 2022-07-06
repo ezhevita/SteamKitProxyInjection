@@ -1,6 +1,6 @@
 <Project>
 	<ItemGroup>
-		<PackageVersion Include="Lib.Harmony" Version="2.2.0" />
+		<PackageVersion Include="Lib.Harmony" Version="2.2.1" />
 	</ItemGroup>
 
 	<ItemGroup Condition="'$(TargetFramework)' == 'net48'">
