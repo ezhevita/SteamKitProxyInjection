@@ -49,8 +49,11 @@ jobs:
       - name: Restore dependencies
         run: dotnet restore
 
+      - name: Disable local packages source
+        run: dotnet nuget disable source "Microsoft Visual Studio Offline Packages"
+
       - name: Build with .NET Framework
-        run: dotnet publish -c Release -f net48 -o out/${{ github.event.repository.name }}-generic-netf -v d
+        run: dotnet publish -c Release -f net48 -o out/${{ github.event.repository.name }}-generic-netf
 
       - name: Upload generic-netf artifacts
         uses: actions/upload-artifact@v2
