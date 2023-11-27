@@ -48,9 +48,7 @@ namespace SteamKitProxyInjection {
 		[SuppressMessage("ReSharper", "InconsistentNaming")]
 #pragma warning disable CA1707
 		public static void TargetMethod(ClientWebSocket ___socket) {
-			if (___socket == null) {
-				throw new ArgumentNullException(nameof(___socket));
-			}
+			ArgumentNullException.ThrowIfNull(___socket);
 
 			ASF.ArchiLogger.LogGenericTrace("Retrieving WebProxy config value...");
 			IWebProxy? webProxy = ASF.GlobalConfig?.WebProxy;
