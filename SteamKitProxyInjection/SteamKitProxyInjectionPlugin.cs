@@ -32,11 +32,11 @@ namespace SteamKitProxyInjection {
 			Harmony harmony = new("dev.ezhevita.SteamKitProxyInjection");
 
 			ASF.ArchiLogger.LogGenericTrace("Retrieving WebSocketConnection and WebSocketContext types...");
-			Type webSocketConnectionType = AccessTools.TypeByName("SteamKit2.WebSocketConnection");
-			Type webSocketContextType = AccessTools.TypeByName("SteamKit2.WebSocketConnection+WebSocketContext");
+			var webSocketConnectionType = AccessTools.TypeByName("SteamKit2.WebSocketConnection");
+			var webSocketContextType = AccessTools.TypeByName("SteamKit2.WebSocketConnection+WebSocketContext");
 
 			ASF.ArchiLogger.LogGenericTrace("Retrieving WebSocketContext constructor...");
-			ConstructorInfo constructor = AccessTools.Constructor(webSocketContextType, new[] {webSocketConnectionType, typeof(EndPoint)});
+			var constructor = AccessTools.Constructor(webSocketContextType, [webSocketConnectionType, typeof(EndPoint)]);
 			ASF.ArchiLogger.LogGenericTrace("Patching...");
 			harmony.Patch(constructor, postfix: new HarmonyMethod(AccessTools.Method(typeof(SteamKitProxyInjectionPlugin), nameof(TargetMethod))));
 			ASF.ArchiLogger.LogGenericInfo("Successfully injected!");
@@ -44,9 +44,8 @@ namespace SteamKitProxyInjection {
 			return Task.CompletedTask;
 		}
 
-		[SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-		[SuppressMessage("ReSharper", "InconsistentNaming")]
 #pragma warning disable CA1707
+		[SuppressMessage("ReSharper", "InconsistentNaming")]
 		public static void TargetMethod(ClientWebSocket ___socket) {
 			ArgumentNullException.ThrowIfNull(___socket);
 
