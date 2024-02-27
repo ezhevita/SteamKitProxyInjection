@@ -12,52 +12,54 @@ using HarmonyLib;
 using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
 
-namespace SteamKitProxyInjection {
-	[Export(typeof(IPlugin))]
-	[UsedImplicitly]
-	public class SteamKitProxyInjectionPlugin : IASF {
-		public Task OnLoaded()
-		{
-			ASF.ArchiLogger.LogGenericInfo($"{Name} by ezhevita | Support & source code: https://github.com/ezhevita/{Name}");
+namespace SteamKitProxyInjection;
 
-			return Task.CompletedTask;
-		}
+[Export(typeof(IPlugin))]
+[UsedImplicitly]
+public class SteamKitProxyInjectionPlugin : IASF
+{
+	public Task OnLoaded()
+	{
+		ASF.ArchiLogger.LogGenericInfo($"{Name} by ezhevita | Support & source code: https://github.com/ezhevita/{Name}");
 
-		public string Name => nameof(SteamKitProxyInjection);
-		public Version Version => Assembly.GetExecutingAssembly().GetName().Version ?? throw new InvalidOperationException();
+		return Task.CompletedTask;
+	}
 
-		public Task OnASFInit(IReadOnlyDictionary<string, JToken>? additionalConfigProperties = null)
-		{
-			ASF.ArchiLogger.LogGenericInfo("Injecting...");
-			Harmony harmony = new("dev.ezhevita.SteamKitProxyInjection");
+	public string Name => nameof(SteamKitProxyInjection);
+	public Version Version => Assembly.GetExecutingAssembly().GetName().Version ?? throw new InvalidOperationException();
 
-			ASF.ArchiLogger.LogGenericTrace("Retrieving WebSocketConnection and WebSocketContext types...");
-			var webSocketConnectionType = AccessTools.TypeByName("SteamKit2.WebSocketConnection");
-			var webSocketContextType = AccessTools.TypeByName("SteamKit2.WebSocketConnection+WebSocketContext");
+	public Task OnASFInit(IReadOnlyDictionary<string, JToken>? additionalConfigProperties = null)
+	{
+		ASF.ArchiLogger.LogGenericInfo("Injecting...");
+		var harmony = new Harmony("dev.ezhevita.SteamKitProxyInjection");
 
-			ASF.ArchiLogger.LogGenericTrace("Retrieving WebSocketContext constructor...");
-			var constructor = AccessTools.Constructor(webSocketContextType, [webSocketConnectionType, typeof(EndPoint)]);
-			ASF.ArchiLogger.LogGenericTrace("Patching...");
-			harmony.Patch(constructor, postfix: new HarmonyMethod(AccessTools.Method(typeof(SteamKitProxyInjectionPlugin), nameof(TargetMethod))));
-			ASF.ArchiLogger.LogGenericInfo("Successfully injected!");
+		ASF.ArchiLogger.LogGenericTrace("Retrieving WebSocketConnection and WebSocketContext types...");
+		var webSocketConnectionType = AccessTools.TypeByName("SteamKit2.WebSocketConnection");
+		var webSocketContextType = AccessTools.TypeByName("SteamKit2.WebSocketConnection+WebSocketContext");
 
-			return Task.CompletedTask;
-		}
+		ASF.ArchiLogger.LogGenericTrace("Retrieving WebSocketContext constructor...");
+		var constructor = AccessTools.Constructor(webSocketContextType, [webSocketConnectionType, typeof(EndPoint)]);
+		ASF.ArchiLogger.LogGenericTrace("Patching...");
+		harmony.Patch(constructor, postfix: new HarmonyMethod(AccessTools.Method(typeof(SteamKitProxyInjectionPlugin), nameof(TargetMethod))));
+		ASF.ArchiLogger.LogGenericInfo("Successfully injected!");
+
+		return Task.CompletedTask;
+	}
 
 #pragma warning disable CA1707
-		[SuppressMessage("ReSharper", "InconsistentNaming")]
-		public static void TargetMethod(ClientWebSocket ___socket) {
-			ArgumentNullException.ThrowIfNull(___socket);
-
-			ASF.ArchiLogger.LogGenericTrace("Retrieving WebProxy config value...");
-			IWebProxy? webProxy = ASF.GlobalConfig?.WebProxy;
-			if (webProxy == null) {
-				return;
-			}
-
-			ASF.ArchiLogger.LogGenericTrace("Setting proxy...");
-			___socket.Options.Proxy = webProxy;
-		}
+	public static void TargetMethod([SuppressMessage("ReSharper", "InconsistentNaming")] ClientWebSocket ___socket)
+	{
 #pragma warning restore CA1707
+		ArgumentNullException.ThrowIfNull(___socket);
+
+		ASF.ArchiLogger.LogGenericTrace("Retrieving WebProxy config value...");
+		IWebProxy? webProxy = ASF.GlobalConfig?.WebProxy;
+		if (webProxy == null)
+		{
+			return;
+		}
+
+		ASF.ArchiLogger.LogGenericTrace("Setting proxy...");
+		___socket.Options.Proxy = webProxy;
 	}
 }

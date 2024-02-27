@@ -1,12 +1,12 @@
 <Project>
 
-	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../ArchiSteamFarm/'))" />
+	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../ArchiSteamFarm/'))"/>
 
 	<PropertyGroup>
 		<Description>Plugin for ASF which patches constructor of WebSocketContext in SteamKit to allow proxifying WebSocket connection.</Description>
 		<Version>2.2.0.0</Version>
 	</PropertyGroup>
 
-	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))"/>
 
 </Project>

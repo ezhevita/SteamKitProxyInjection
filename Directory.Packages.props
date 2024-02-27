@@ -1,3 +1,6 @@
 <Project>
-    <Import Project="ArchiSteamFarm/Directory.Packages.props" />
+	<Import Project="ArchiSteamFarm/Directory.Packages.props" />
+	<ItemGroup>
+		<PackageVersion Include="Lib.Harmony" Version="2.3.0" />
+	</ItemGroup>
 </Project>
