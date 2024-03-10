@@ -5,12 +5,12 @@ using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.WebSockets;
 using System.Reflection;
+using System.Text.Json;
 using System.Threading.Tasks;
 using ArchiSteamFarm.Core;
 using ArchiSteamFarm.Plugins.Interfaces;
 using HarmonyLib;
 using JetBrains.Annotations;
-using Newtonsoft.Json.Linq;
 
 namespace SteamKitProxyInjection;
 
@@ -28,7 +28,7 @@ public class SteamKitProxyInjectionPlugin : IASF
 	public string Name => nameof(SteamKitProxyInjection);
 	public Version Version => Assembly.GetExecutingAssembly().GetName().Version ?? throw new InvalidOperationException();
 
-	public Task OnASFInit(IReadOnlyDictionary<string, JToken>? additionalConfigProperties = null)
+	public Task OnASFInit(IReadOnlyDictionary<string, JsonElement>? additionalConfigProperties = null)
 	{
 		ASF.ArchiLogger.LogGenericInfo("Injecting...");
 		var harmony = new Harmony("dev.ezhevita.SteamKitProxyInjection");
